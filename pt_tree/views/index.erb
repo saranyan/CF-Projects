@@ -1,0 +1,69 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset=utf-8>
+	<title>Product Taxonomy Tree</title>
+	<!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+	</script>
+	<![endif]-->
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+	<script type="text/javascript" src="http://static.jstree.com/v.1.0pre/jquery.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	<!--<script src="jstree/jquery.jstree.js"></script>-->
+	<script type="text/javascript" src="http://static.jstree.com/v.1.0pre/jquery.cookie.js"></script>
+	<script type="text/javascript" src="http://static.jstree.com/v.1.0pre/jquery.hotkeys.js"></script>
+	<script type="text/javascript" src="http://static.jstree.com/v.1.0pre/jquery.jstree.js"></script>
+
+	<link href="./bootstrap.css" rel="stylesheet">
+	<link href="./docs.css" rel="stylesheet">
+
+</head>
+<body>
+	<div class="container">
+	
+	<h1>X.commerce Product Taxonomy Tree</h1>
+	<p>These are the products that are currently supported by X.commerce Product Taxonomy capability</p>
+	<p> Built by <a href="http://twitter.com/saranyan"> @saranyan </a> </p>
+		<form id="searchform" action="#" class="well">
+			search: <input type="text" id="searchbox" />
+			<input type="button" class="btn" value="Search" id="search" style="">
+
+		</form>
+		<div class="well">
+			<div id="tree1"></div>
+
+			<div id="demo1"></div>
+		</div>
+	</div>
+
+</body>	
+<script type="text/javascript">
+
+
+$(function () {
+	$("#search").click(function () {
+		var val = $("#searchbox").val();
+
+		$("#tree1").jstree("search",val);
+	});
+	$("#tree1").jstree({ 
+		"json_data" : {
+			"ajax" : {
+				"url" : "./products.json",
+				"data" : function (n) { 
+					return { id : n.attr ? n.attr("id") : 0 }; 
+
+				}
+			}
+		},
+		"plugins" : [ "themes", "json_data","ui", "search" ]
+	});
+});
+</script>
+</html>
